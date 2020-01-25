@@ -5,15 +5,17 @@ const spider = require('../service/spider')
  * 跳过数据库检索获取实时最新数据
  */
 const getRealTimeData = () => {
-    let url = 'https://3g.dxy.cn/newh5/view/pneumonia?enterid=1579582238&scene=2&clicktime=1579582238&isappinstalled=0&from=timeline'
+    let url = 'http://t.cn/A6vBv3yL'
     return new Promise((resolve, reject) => {
         superagent.get(url).end((err, res) => {
             if (err) {
                 reject(err)
             } else {
+                // console.log(res)
                 let result = {
                     sumInfo: getSumInfo(res),
                     provinceInfo: getProvinceInfo(res)
+
                 }
                 resolve(result)
             }
@@ -42,8 +44,8 @@ const getSumInfo = (res) => {
     let result = {
         nationWideConfirmed: parseArray[2],
         suspected: parseArray[5],
-        cured: parseArray[8],
-        died: parseArray[11]
+        cured: parseArray[7],
+        died: parseArray[10]
     }
     return result
 }
@@ -54,92 +56,13 @@ const getSumInfo = (res) => {
 const getProvinceInfo = (res) => {
     let provinces = []
     let $ = cheerio.load(res.text)
-    // 因为原网页会有展开的部分，所以对展开的部分单独处理
-    let expendProvince = 'div.mapBox___qoGhu .areaBox___3jZkr .expand___wz_07'
-    $(expendProvince).toArray().forEach((v, i) => {
-        $(v).each((index, el) => {
-            let province = {
-                provinceName: '',
-                confirmed: '',
-                died: '',
-                cured: '',
-                cities: []
-            }
-            $('.areaBlock1___3V3UU', el).each((i, e) => {
-                let temp = $('p', e).toArray()
-                province = {
-                    provinceName: $(temp[0]).text(),
-                    confirmed: $(temp[1]).text(),
-                    died: $(temp[2]).text(),
-                    cured: $(temp[3]).text(),
-                    cities: []
-                }
-                provinces.push(province)
-            })
-            $('.areaBlock2___27vn7', el).each((i, e) => {
-                let temp = $('p', e).toArray()
-                let city = {
-                    province: province.provinceName,
-                    cityName: $(temp[0]).text(),
-                    confirmed: $(temp[1]).text(),
-                    died: $(temp[2]).text() || '0',
-                    cured: $(temp[3]).text() || '0'
-                }
-                spider.updateCityInfo(city).then(res => {
-                    if (res.affectedRows === 0) {
-                        spider.insertCityInfo(city)
-                    }
-                }).catch(err=>{
-                    console.log(err)
-                })
-                province.cities.push(city)
-            })
-        })
-    })
-    let provinceSelector = 'div.mapBox___qoGhu .areaBox___3jZkr .fold___xVOZX'
-    $(provinceSelector).toArray().forEach((v, i) => {
-        $(v).each((index, el) => {
-            let province = {
-                provinceName: '',
-                confirmed: '',
-                died: '',
-                cured: '',
-                cities: []
-            }
-            $('.areaBlock1___3V3UU', el).each((i, e) => {
-                let temp = $('p', e).toArray()
-                province = {
-                    provinceName: $(temp[0]).text(),
-                    confirmed: $(temp[1]).text(),
-                    died: $(temp[2]).text(),
-                    cured: $(temp[3]).text(),
-                    cities: []
-                }
-                provinces.push(province)
-            })
-            $('.areaBlock2___27vn7', el).each((i, e) => {
-                let temp = $('p', e).toArray()
-                let city = {
-                    province: province.provinceName,
-                    cityName: $(temp[0]).text(),
-                    confirmed: $(temp[1]).text(),
-                    died: $(temp[2]).text() || '0',
-                    cured: $(temp[3]).text() || '0'
-                }
-                spider.updateCityInfo(city).then(res => {
-                    if (res.affectedRows === 0) {
-                        spider.insertCityInfo(city)
-                    }
-                }).catch(err=>{
-                    console.log(err)
-                })
-                province.cities.push(city)
-            })
-        })
-    })
+    var patt = /(\swindow\.getAreaStat\s=\s).*\}\]\}\]/g
+    var final = patt.exec(res.text)[0].replace(' window.getAreaStat = ', '')
+    return JSON.parse(final)
+}
+const parseHtml = (provinces, $, className) => {
     return provinces
 }
-
 
 exports.getRealTimeData = getRealTimeData
 exports.getDatabaseData = getDatabaseData

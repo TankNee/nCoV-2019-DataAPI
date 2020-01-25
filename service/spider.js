@@ -18,7 +18,7 @@ const getAllInfo = () => {
  */
 const insertCityInfo = (city) => {
     return new Promise((resolve, reject) => {
-        let sql = `INSERT INTO ncov_cityinfo (province,cityname,confirmed,died,cured) values ('${city.province}','${city.cityName}',${city.confirmed},${city.died},${city.cured})`
+        let sql = `INSERT INTO ncov_cityinfo (province,cityname,confirmed,died,cured,addtime) values ('${city.province}','${city.cityName}',${city.confirmed},${city.died},${city.cured},${city.addtime})`
         db.query(sql, (err, rows) => {
             if(err){
                 reject(err)
