@@ -4,7 +4,7 @@ const db = require('../database/mysql')
  */
 const getAllInfo = () => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT * FROM ncov_cityinfo ORDER BY province DESC`, (err, rows) => {
+        db.query(`SELECT * FROM cities ORDER BY addtime DESC`, (err, rows) => {
             if (err) {
                 reject(err)
             }
@@ -13,14 +13,46 @@ const getAllInfo = () => {
     })
 }
 /**
+ * 插入综合信息
+ * @param {*} sum 综合信息对象 
+ */
+const insertSumInfo = (sum) => {
+    return new Promise((resolve, reject) => {
+        let sql = `INSERT INTO suminfo (confirmedCount,suspectedCount,deadCount,curedCount,addtime) values (${sum.confirmedCount},${sum.suspectedCount},${sum.deadCount},${sum.curedCount},${sum.addtime})`
+        db.query(sql, (err, rows) => {
+            if (err) {
+                reject(err)
+            }
+            resolve(rows)
+        })
+    })
+}
+
+/**
+ * 插入省份的数据
+ * @param {*} province 省份对象 
+ */
+const insertProvinceInfo = (province) => {
+    return new Promise((resolve, reject) => {
+        let sql = `INSERT INTO provinces (provinceName,provinceShortName,confirmedCount,suspectedCount,deadCount,curedCount,addtime) values ('${province.provinceName}','${province.provinceShortName}',${province.confirmedCount},${province.suspectedCount},${province.deadCount},${province.curedCount},${province.addtime})`
+        db.query(sql, (err, rows) => {
+            if (err) {
+                reject(err)
+            }
+            resolve(rows)
+        })
+    })
+}
+
+/**
  * 插入城市信息
  * @param {*} city 城市信息对象
  */
 const insertCityInfo = (city) => {
     return new Promise((resolve, reject) => {
-        let sql = `INSERT INTO ncov_cityinfo (province,cityname,confirmed,died,cured,addtime) values ('${city.province}','${city.cityName}',${city.confirmed},${city.died},${city.cured},${city.addtime})`
+        let sql = `INSERT INTO cities (provinceName,cityName,confirmedCount,suspectedCount,deadCount,curedCount,addtime) values ('${city.provinceName}','${city.cityName}',${city.confirmedCount},${city.suspectedCount},${city.deadCount},${city.curedCount},${city.addtime})`
         db.query(sql, (err, rows) => {
-            if(err){
+            if (err) {
                 reject(err)
             }
             resolve(rows)
@@ -44,5 +76,7 @@ const updateCityInfo = (city) => {
     })
 }
 exports.getAllInfo = getAllInfo
+exports.insertSumInfo = insertSumInfo
+exports.insertProvinceInfo = insertProvinceInfo
 exports.insertCityInfo = insertCityInfo
 exports.updateCityInfo = updateCityInfo

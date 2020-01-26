@@ -1,4 +1,7 @@
 const mysql = require('mysql')
+const Sequelize = require('sequelize')
+
+
 
 const pool = mysql.createPool({
     host: '127.0.0.1',
