@@ -30,15 +30,16 @@ const getDatabaseData = () => {
                     reject(err)
                 }).then(res1 => {
                     spider.getSpecifyInfo('addtime', res[0].addtime, 'cities', 'true').then(res2 => {
-                        let cityList = []
                         res1.forEach(province => {
+                            let temp = province
+                            let cityList = []
                             res2.forEach(city => {
                                 if (city.provinceShortName === province.provinceShortName) {
                                     cityList.push(city)
                                 }
                             })
-                            province['cities'] = cityList
-                            result.push(province)
+                            temp['cities'] = cityList
+                            result.push(temp)
                         })  
                     }).catch(err => {
                         reject(err)
