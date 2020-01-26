@@ -12,8 +12,8 @@ const getRealTimeData = (addtime = Date.now()) => {
                 reject(err)
             } else {
                 let result = {
-                    sumInfo: getSumInfoRealTime(res,addtime),
-                    provinceInfo: getProvinceInfoRealTime(res,addtime)
+                    sumInfo: getSumInfoRealTime(res, addtime),
+                    provinceInfo: getProvinceInfoRealTime(res, addtime)
                 }
                 resolve(result)
             }
@@ -30,13 +30,28 @@ const getDatabaseData = () => {
         })
     })
 }
-
+/**
+ * 获取单个城市的全部/最新信息
+ * @param {*} attrName 参数名称
+ * @param {*} attrValue 参数值
+ * @param {*} tableName 表名
+ * @param {*} all 是否选取全部信息，如果为否，那么就返回最新信息
+ */
+const getSpecifyInfo = (attrName,attrValue,tableName,all = false) => {
+    return new Promise((resolve, reject) => {
+        spider.getSpecifyInfo(attrName,attrValue,tableName,all).then(res => {
+            resolve(res)
+        }).catch((err) => {
+            reject(err)
+        })
+    })
+}
 /**
  * 根据获取的内容解析得到想要的数据
  * @param {*} res superagent得到的数据
  * @param {*} addtime 添加的时间
  */
-const getSumInfoRealTime = (res,addtime = Date.now()) => {
+const getSumInfoRealTime = (res, addtime = Date.now()) => {
     let $ = cheerio.load(res.text)
     let parseArray = $('div.mapBox___qoGhu .mapTop___2VZCl .confirmedNumber___3WrF5 .content___2hIPS').text().split(' ')
     // console.log(parseArray);
@@ -55,15 +70,15 @@ const getSumInfoRealTime = (res,addtime = Date.now()) => {
  * @param {*} res superagent得到的数据
  * @param {*} addtime 添加的时间
  */
-const getProvinceInfoRealTime = (res,addtime = Date.now()) => {
+const getProvinceInfoRealTime = (res, addtime = Date.now()) => {
     let $ = cheerio.load(res.text)
     var patt = /(\swindow\.getAreaStat\s=\s).*\}\]\}\]/g
     var final = patt.exec(res.text)[0].replace(' window.getAreaStat = ', '')
-    var json =  JSON.parse(final)
+    var json = JSON.parse(final)
     json.forEach(province => {
         province['addtime'] = addtime
         spider.insertProvinceInfo(province)
-        province.cities.forEach(city =>{
+        province.cities.forEach(city => {
             city['provinceName'] = province.provinceShortName
             city['addtime'] = addtime
             spider.insertCityInfo(city)
@@ -74,3 +89,4 @@ const getProvinceInfoRealTime = (res,addtime = Date.now()) => {
 
 exports.getRealTimeData = getRealTimeData
 exports.getDatabaseData = getDatabaseData
+exports.getSpecifyInfo = getSpecifyInfo

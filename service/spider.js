@@ -13,6 +13,25 @@ const getAllInfo = () => {
     })
 }
 /**
+ * 获取单个城市的全部/最新信息
+ * @param {*} attrName 参数名称
+ * @param {*} attrValue 参数值
+ * @param {*} tableName 表名
+ * @param {*} all 是否选取全部信息，如果为否，那么就返回最新信息
+ */
+const getSpecifyInfo = (attrName,attrValue,tableName, all = 'false') => {
+    return new Promise((resolve, reject) => {
+        var limit = all === 'true' ? '' : 'LIMIT 1'
+        db.query(`SELECT * FROM ${tableName} WHERE ${attrName} = '${attrValue}' ORDER BY addtime DESC ${limit}`, (err, rows) => {
+            if (err) {
+                reject(err)
+            }
+            resolve(rows)
+        })
+    })
+}
+
+/**
  * 插入综合信息
  * @param {*} sum 综合信息对象 
  */
@@ -50,7 +69,7 @@ const insertProvinceInfo = (province) => {
  */
 const insertCityInfo = (city) => {
     return new Promise((resolve, reject) => {
-        let sql = `INSERT INTO cities (provinceName,cityName,confirmedCount,suspectedCount,deadCount,curedCount,addtime) values ('${city.provinceName}','${city.cityName}',${city.confirmedCount},${city.suspectedCount},${city.deadCount},${city.curedCount},${city.addtime})`
+        let sql = `INSERT INTO cities (provinceShortName,cityName,confirmedCount,suspectedCount,deadCount,curedCount,addtime) values ('${city.provinceName}','${city.cityName}',${city.confirmedCount},${city.suspectedCount},${city.deadCount},${city.curedCount},${city.addtime})`
         db.query(sql, (err, rows) => {
             if (err) {
                 reject(err)
@@ -80,3 +99,4 @@ exports.insertSumInfo = insertSumInfo
 exports.insertProvinceInfo = insertProvinceInfo
 exports.insertCityInfo = insertCityInfo
 exports.updateCityInfo = updateCityInfo
+exports.getSpecifyInfo = getSpecifyInfo
