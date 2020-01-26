@@ -26,16 +26,15 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/spider',spiderRouter);
 
+
 const scheduleGetData = (time,addtime) => {
-  schedule.scheduleJob(`* ${time} * * * *`,()=>{
+  schedule.scheduleJob(`0 ${time} * * * *`,()=>{
     nCovUtils.getRealTimeData(addtime)
-    console.log('GetSuccess')
+    console.log('GetSuccess',new Date().toLocaleString())
   })
 }
 
-scheduleGetData(0,Date.now())
 scheduleGetData(20,Date.now())
-scheduleGetData(40,Date.now())
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
