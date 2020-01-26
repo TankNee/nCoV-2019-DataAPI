@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var schedule = require('node-schedule')
+const nCovUtils = require('./utils/nCovInfoUtils')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -23,6 +25,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/spider',spiderRouter);
+
+const scheduleGetData = (time,addtime) => {
+  schedule.scheduleJob(`* ${time} * * * *`,()=>{
+    nCovUtils.getRealTimeData(addtime)
+    console.log('GetSuccess')
+  })
+}
+
+scheduleGetData(0,Date.now())
+scheduleGetData(20,Date.now())
+scheduleGetData(40,Date.now())
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
