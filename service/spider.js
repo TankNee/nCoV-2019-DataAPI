@@ -4,8 +4,9 @@ const db = require('../database/mysql')
  */
 const getAllInfo = () => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT * FROM cities ORDER BY addtime DESC`, (err, rows) => {
+        db.query(`SELECT * FROM suminfo ORDER BY addtime DESC LIMIT 1`, (err, rows) => {
             if (err) {
+                console.log(err)
                 reject(err)
             }
             resolve(rows)

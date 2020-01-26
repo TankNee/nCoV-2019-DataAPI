@@ -22,10 +22,7 @@ router.get('/', function (req, res, next) {
  * 获取单个城市的信息
  */
 router.post('/city', function (req, res, next) {
-    // var cityname = req.body.cityname
-    // var all = req.body.all
     const {cityname,all} = req.query
-    // console.log(req.params)
     nCovUtils.getSpecifyInfo('cityName',cityname,'cities',all).then(res1 =>{
         res.send(res1)
         res.end()

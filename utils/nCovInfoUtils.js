@@ -24,7 +24,30 @@ const getRealTimeData = (addtime = Date.now()) => {
 const getDatabaseData = () => {
     return new Promise((resolve, reject) => {
         spider.getAllInfo().then(res => {
-            resolve(res)
+            let result = []
+            spider.getSpecifyInfo('addtime', res[0].addtime, 'provinces', 'true').then(res0 => res0)
+                .catch(err => {
+                    reject(err)
+                }).then(res1 => {
+                    spider.getSpecifyInfo('addtime', res[0].addtime, 'cities', 'true').then(res2 => {
+                        let cityList = []
+                        res1.forEach(province => {
+                            res2.forEach(city => {
+                                if (city.provinceShortName === province.provinceShortName) {
+                                    cityList.push(city)
+                                }
+                            })
+                            province['cities'] = cityList
+                            result.push(province)
+                        })  
+                    }).catch(err => {
+                        reject(err)
+                    }).then(res3 =>{
+                        resolve(result)
+                    })
+
+                })
+
         }).catch(err => {
             reject(err)
         })
@@ -37,9 +60,9 @@ const getDatabaseData = () => {
  * @param {*} tableName 表名
  * @param {*} all 是否选取全部信息，如果为否，那么就返回最新信息
  */
-const getSpecifyInfo = (attrName,attrValue,tableName,all = false) => {
+const getSpecifyInfo = (attrName, attrValue, tableName, all = false) => {
     return new Promise((resolve, reject) => {
-        spider.getSpecifyInfo(attrName,attrValue,tableName,all).then(res => {
+        spider.getSpecifyInfo(attrName, attrValue, tableName, all).then(res => {
             resolve(res)
         }).catch((err) => {
             reject(err)
