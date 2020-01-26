@@ -24,25 +24,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/spider',spiderRouter);
+app.use('/spider', spiderRouter);
 
-const scheduleGetData = (time,addtime) => {
-  schedule.scheduleJob(`0 ${time} * * * *`,()=>{
+const scheduleGetData = (time, addtime = Date.now()) => {
+  schedule.scheduleJob(`0 ${time} * * * *`, () => {
     nCovUtils.getRealTimeData(addtime)
-    console.log('GetSuccess',new Date().toLocaleString())
+    console.log('GetSuccess', new Date().toLocaleString())
   })
 }
-scheduleGetData(0,Date.now())
-scheduleGetData(20,Date.now())
-scheduleGetData(40,Date.now())
+scheduleGetData(0)
+scheduleGetData(20)
+scheduleGetData(40)
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
