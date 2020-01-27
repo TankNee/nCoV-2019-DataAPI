@@ -175,7 +175,7 @@
 | suspectedCount    | String        | 疑似人数 |
 | curedCount        | String        | 治愈人数 |
 | deadCount         | String        | 死亡人数 |
-| addtime           | 1580091600096 | 爬取时间 |
+| addtime           | number        | 爬取时间 |
 
 
 
@@ -221,4 +221,4 @@
 | suspectedCount    | String        | 疑似人数 |
 | curedCount        | String        | 治愈人数 |
 | deadCount         | String        | 死亡人数 |
-| addtime           | 1580091600096 | 爬取时间 |
+| addtime           | number        | 爬取时间 |
