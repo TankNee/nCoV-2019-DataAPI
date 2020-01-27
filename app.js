@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/spider', spiderRouter);
+app.use('/api', spiderRouter);
 
 const scheduleGetData = (time) => {
   schedule.scheduleJob(`0 ${time} * * * *`, () => {
