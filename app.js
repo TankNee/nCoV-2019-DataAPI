@@ -26,12 +26,16 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/spider', spiderRouter);
 
-const scheduleGetData = (time, addtime = Date.now()) => {
+const scheduleGetData = (time) => {
   schedule.scheduleJob(`0 ${time} * * * *`, () => {
-    nCovUtils.getRealTimeData(addtime)
-    console.log('GetSuccess', new Date().toLocaleString())
+    nCovUtils.getRealTimeData(new Date().getTime()).then(res => {
+      console.log('GetSuccess', new Date().toLocaleString())
+      console.log('Time:', new Date().getTime())
+    })
+
   })
 }
+
 scheduleGetData(0)
 scheduleGetData(20)
 scheduleGetData(40)
