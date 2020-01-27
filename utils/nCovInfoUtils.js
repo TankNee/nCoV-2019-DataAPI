@@ -79,11 +79,18 @@ const getSumInfoRealTime = (res, addtime = Date.now()) => {
     let $ = cheerio.load(res.text)
     let parseArray = $('div.mapBox___qoGhu .mapTop___2VZCl .confirmedNumber___3WrF5 .content___2hIPS').text().split(' ')
     // console.log(parseArray);
+    let tempArray = []
+    parseArray.forEach(e =>{
+        var temp = parseInt(e)
+        if(temp){
+            tempArray.push(temp)
+        }
+    })
     let result = {
-        confirmedCount: parseArray[1],
-        suspectedCount: parseArray[3],
-        curedCount: parseArray[5],
-        deadCount: parseArray[7],
+        confirmedCount: tempArray[0],
+        suspectedCount: tempArray[1],
+        curedCount: tempArray[2],
+        deadCount: tempArray[3],
         addtime: addtime
     }
     spider.insertSumInfo(result)
