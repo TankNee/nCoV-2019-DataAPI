@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "forever_start": "forever start -l nCov.log -a ./bin/www"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
