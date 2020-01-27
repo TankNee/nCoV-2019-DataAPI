@@ -80,10 +80,10 @@ const getSumInfoRealTime = (res, addtime = Date.now()) => {
     let parseArray = $('div.mapBox___qoGhu .mapTop___2VZCl .confirmedNumber___3WrF5 .content___2hIPS').text().split(' ')
     // console.log(parseArray);
     let result = {
-        confirmedCount: parseArray[2],
-        suspectedCount: parseArray[5],
-        curedCount: parseArray[7],
-        deadCount: parseArray[10],
+        confirmedCount: parseArray[1],
+        suspectedCount: parseArray[3],
+        curedCount: parseArray[5],
+        deadCount: parseArray[7],
         addtime: addtime
     }
     spider.insertSumInfo(result)
