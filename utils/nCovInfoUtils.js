@@ -89,8 +89,8 @@ const getSumInfoRealTime = (res, addtime = Date.now()) => {
     let result = {
         confirmedCount: tempArray[0],
         suspectedCount: tempArray[1],
-        curedCount: tempArray[2],
-        deadCount: tempArray[3],
+        curedCount: tempArray[3],
+        deadCount: tempArray[2],
         addtime: addtime
     }
     spider.insertSumInfo(result)

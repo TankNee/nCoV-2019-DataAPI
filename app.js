@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var schedule = require('node-schedule')
+var cors = require('cors')
 const nCovUtils = require('./utils/nCovInfoUtils')
 
 var indexRouter = require('./routes/index');
@@ -21,9 +22,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors({
+  methods:['GET','POST','OPTIONS'],
+  alloweHeaders: ["Content-Type", "application/json;charset=utf-8;application/x-www-form-urlencoded"]
+}))
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/admin', usersRouter);
 app.use('/api', spiderRouter);
 
 const scheduleGetData = (time) => {
@@ -39,6 +44,14 @@ const scheduleGetData = (time) => {
 scheduleGetData(0)
 scheduleGetData(20)
 scheduleGetData(40)
+
+// app.all('*', function (req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Headers', 'Content-type');
+//   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+//   next()
+// });
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
