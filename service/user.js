@@ -1,12 +1,18 @@
+/**
+ * 数据库服务类
+ */
+
 const db = require('../database/mysql')
 
 /**
- * 根据用户名查询用户信息
- * @param {*} userName 用户名
+ * 查询用户信息
+ * @param attrName
+ * @param attrValue
+ * @returns {Promise<unknown>}
  */
-const getUserInfo = (userName) => {
+const getUserInfo = (attrName,attrValue) => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT * FROM users WHERE userName = '${userName}'`, (err, rows) => {
+        db.query(`SELECT * FROM users WHERE ${attrName} = '${attrValue}'`, (err, rows) => {
             if (err) {
                 reject(err)
             }

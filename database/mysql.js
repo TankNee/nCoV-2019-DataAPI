@@ -15,6 +15,9 @@ const pool = mysql.createPool({
  * @param {*} callback 回调函数
  */
 const query = (sql, callback) => {
+    if (sql.indexOf("undefined") !== -1){
+        console.error(sql);
+    }
     pool.getConnection((err,connection)=>{
         connection.query(sql,(err,rows)=>{
             callback(err,rows)

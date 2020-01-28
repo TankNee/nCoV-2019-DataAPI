@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var user = require('../service/user')
+var jwt = require('jsonwebtoken')
 /**
  * 管理员登录接口
  */
@@ -9,7 +10,7 @@ router.post('/login', function (req, res, next) {
     var userName = req.body.userName
     var password = req.body.password
     var lastLoginTime = req.body.lastLoginTime
-    user.getUserInfo(userName).then(res0 =>{
+    user.getUserInfo('userName',userName).then(res0 =>{
         if(res0.length === 0){
             // res.status(601)
             res.json({
@@ -20,11 +21,20 @@ router.post('/login', function (req, res, next) {
             return;
         }
         if(res0[0].password === password){
-            // let userObj = {
-            //     id: res0[0].id,
-            //     userName: res0[0].userName,
-            // }
             res0[0].lastLoginTime = lastLoginTime
+            let content = {
+                userName: res0[0].userName,
+                password: res0[0].password,
+                lastLoginTime: res0[0].lastLoginTime
+            }
+            // 获取当前时间，单位是秒，作为token的创建时间
+            let createdTime = Math.floor(Date.now()/1000)
+            let token = jwt.sign({
+                content,
+                exp: createdTime+60*60*24,
+                iat:createdTime
+            },'nCoV-2019',{algorithm:'RS256'});
+            res0[0].token = token
             user.updateUserInfo(res0[0])
             res.status(200)
             res.json({
@@ -46,5 +56,10 @@ router.post('/login', function (req, res, next) {
         res.end()
     })
 });
+/**
+ * 获取用户信息接口
+ */
+router.post('/getUserInfo', function (req,res,next) {
 
+})
 module.exports = router;
