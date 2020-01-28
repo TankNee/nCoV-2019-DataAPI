@@ -29,25 +29,25 @@ const getDatabaseData = () => {
                 .catch(err => {
                     reject(err)
                 }).then(res1 => {
-                    spider.getSpecifyInfo('addtime', res[0].addtime, 'cities', 'true').then(res2 => {
-                        res1.forEach(province => {
-                            let temp = province
-                            let cityList = []
-                            res2.forEach(city => {
-                                if (city.provinceShortName === province.provinceShortName) {
-                                    cityList.push(city)
-                                }
-                            })
-                            temp['cities'] = cityList
-                            result.push(temp)
-                        })  
-                    }).catch(err => {
-                        reject(err)
-                    }).then(res3 =>{
-                        resolve(result)
+                spider.getSpecifyInfo('addtime', res[0].addtime, 'cities', 'true').then(res2 => {
+                    res1.forEach(province => {
+                        let temp = province
+                        let cityList = []
+                        res2.forEach(city => {
+                            if (city.provinceShortName === province.provinceShortName) {
+                                cityList.push(city)
+                            }
+                        })
+                        temp['cities'] = cityList
+                        result.push(temp)
                     })
-
+                }).catch(err => {
+                    reject(err)
+                }).then(res3 => {
+                    resolve(result)
                 })
+
+            })
 
         }).catch(err => {
             reject(err)
@@ -82,8 +82,8 @@ const getSumInfoRealTime = (res, addtime = Date.now()) => {
     var patt = /(rgb\(65, 105, 226\);">)\d*<\/span>/gm
     var final = res.text.match(patt)
     let tempArray = []
-    final.forEach(e =>{
-         tempArray.push(e.replace('rgb(65, 105, 226);">','').replace('</span>',''));
+    final.forEach(e => {
+        tempArray.push(e.replace('rgb(65, 105, 226);">', '').replace('</span>', ''));
     })
     let result = {
         confirmedCount: tempArray[0],
@@ -102,19 +102,20 @@ const getSumInfoRealTime = (res, addtime = Date.now()) => {
  */
 const getProvinceInfoRealTime = (res, addtime = Date.now()) => {
     let $ = cheerio.load(res.text)
-    var patt = /(\swindow\.getAreaStat\s=\s).*\[\]\}\]/g
+    var patt = /(\swindow\.getAreaStat\s=\s).*\}\]\}\]/g
     // console.log(res.text)
     var final = patt.exec(res.text)[0].replace(' window.getAreaStat = ', '')
+    // var final = res.text.match(patt)
     var json = JSON.parse(final)
     json.forEach(province => {
         province['addtime'] = addtime
-        spider.insertProvinceInfo(province).catch(err =>{
+        spider.insertProvinceInfo(province).catch(err => {
             console.error(err)
         })
         province.cities.forEach(city => {
             city['provinceName'] = province.provinceShortName
             city['addtime'] = addtime
-            spider.insertCityInfo(city).catch(err=>{
+            spider.insertCityInfo(city).catch(err => {
                 console.error(err)
             })
         })
