@@ -19,11 +19,16 @@ const getAllInfo = () => {
  * @param {*} attrValue 参数值
  * @param {*} tableName 表名
  * @param {*} all 是否选取全部信息，如果为否，那么就返回最新信息
+ * @param isSum
  */
-const getSpecifyInfo = (attrName,attrValue,tableName, all = 'false') => {
+const getSpecifyInfo = (attrName,attrValue ,tableName, all = 'false',isSum = false) => {
     return new Promise((resolve, reject) => {
         var limit = all === 'true' ? '' : 'LIMIT 1'
-        db.query(`SELECT * FROM ${tableName} WHERE ${attrName} = '${attrValue}' ORDER BY addtime DESC ${limit}`, (err, rows) => {
+        var condition = `WHERE ${attrName} = ${attrValue}`;
+        if (isSum){
+            condition = ''
+        }
+        db.query(`SELECT * FROM ${tableName} ${condition} ORDER BY addtime DESC ${limit}`, (err, rows) => {
             if (err) {
                 reject(err)
             }
