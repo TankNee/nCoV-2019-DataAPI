@@ -6,7 +6,7 @@
 
 ## 数据可视化查看地址
 
-[管理后台](http://ncov.neeto.cn)
+[管理后台](http://ncov.neeto.cn/admin)
 
 > 登录用户名 ： `demo`
 >

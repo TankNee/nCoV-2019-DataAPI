@@ -26,8 +26,8 @@ app.use(cors({
   methods:['GET','POST','OPTIONS'],
   alloweHeaders: ["Content-Type", "application/json;charset=utf-8;application/x-www-form-urlencoded"]
 }))
-app.use(express.static(path.join(__dirname, 'doc')));
-app.use('/', indexRouter);
+app.use('/admin',express.static(path.join(__dirname, 'docs')));
+// app.use('/', indexRouter);
 app.use('/admin', usersRouter);
 app.use('/api', spiderRouter);
 
