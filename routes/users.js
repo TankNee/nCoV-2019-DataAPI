@@ -64,22 +64,36 @@ router.post('/getUserInfo', function (req, res, next) {
     var token = req.headers.token
     var id = req.body.id;
     user.getUserInfo('id', id).then(res0 => {
-        if (res0[0].token === token) {
-            res.json({
-                code: 200,
-                msg: '获取成功',
-                userInfo: res0[0]
-            })
-            res.end()
-        }else {
-            res.status(603)
-            res.json({
-                code: 603,
-                msg: 'token验证失败',
-            })
-            res.end()
-        }
-    }).catch(err =>{
+        jwt.verify(token, 'nCoV-2019-WuHan', (err, data) => {
+            if (!err) {
+                if (Math.floor(Date.now() / 1000) < data.exp) {
+                    console.log(data)
+                    res.json({
+                        code: 200,
+                        msg: '获取成功',
+                        userInfo: res0[0]
+                    })
+                    res.end()
+                } else {
+                    res.status(603)
+                    res.json({
+                        code: 603,
+                        msg: 'token已过期',
+                    })
+                    res.end()
+                }
+            } else {
+                res.status(604)
+                res.json({
+                    code: 604,
+                    msg: 'token揭秘错误',
+                    err: err
+                })
+                res.end()
+            }
+        })
+
+    }).catch(err => {
         res.status(600)
         res.json({
             code: 600,

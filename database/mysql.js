@@ -5,8 +5,8 @@ const Sequelize = require('sequelize')
 
 const pool = mysql.createPool({
     host: '127.0.0.1',
-    user: 'ncov',
-    password: 'EdTCpb5Daj34CYBx',
+    user: 'root',
+    password: '451000',
     database: 'ncov'
 })
 /**
