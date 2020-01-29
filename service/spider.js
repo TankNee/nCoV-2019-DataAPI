@@ -24,7 +24,7 @@ const getAllInfo = () => {
 const getSpecifyInfo = (attrName,attrValue ,tableName, all = 'false',isSum = false) => {
     return new Promise((resolve, reject) => {
         var limit = all === 'true' ? '' : 'LIMIT 1'
-        var condition = `WHERE ${attrName} = ${attrValue}`;
+        var condition = `WHERE ${attrName} = '${attrValue}'`;
         if (isSum){
             condition = ''
         }

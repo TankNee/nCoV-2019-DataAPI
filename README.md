@@ -4,6 +4,22 @@
 
 本项目基于nodejs-express框架构建，使用正则表达式爬取页面信息
 
+## 数据可视化查看地址
+
+[管理后台](http://ncov.neeto.cn)
+
+> 登录用户名 ： `demo`
+>
+> 登录密码：`demo`
+>
+> 模板来源：[lin-xin](https://github.com/lin-xin/vue-manage-system)
+
+<img src="https://img.tanknee.cn/blogpicbed/2020/01/20200129bfa81ed0c5c5c.png"/>
+
+<img src="https://img.tanknee.cn/blogpicbed/2020/01/202001292c6a1345064f1.png"/>
+
+<img src="https://img.tanknee.cn/blogpicbed/2020/01/202001294869760b6e94b.png"/>
+
 ## api接口地址
 
 #### 基础URL：
