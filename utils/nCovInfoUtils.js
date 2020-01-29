@@ -79,17 +79,15 @@ const getSumInfoRealTime = (res, addtime = Date.now()) => {
     // let $ = cheerio.load(res.text)
     // console.log($('.mapBox___qoGhu .mapTop___2VZCl .confirmedNumber___3WrF5').html())
     // let parseArray = $('.mapBox___qoGhu .mapTop___2VZCl .confirmedNumber___3WrF5 .content___2hIPS').text().split(' ')
-    var patt = /(rgb\(65, 105, 226\);">)\d*<\/span>/gm
+    var patt = /(\{\swindow\.getStatisticsService\s=\s).*\}(\})/gm
     var final = res.text.match(patt)
-    let tempArray = []
-    final.forEach(e => {
-        tempArray.push(e.replace('rgb(65, 105, 226);">', '').replace('</span>', ''));
-    })
+    let temp = final[0].replace('{ window.getStatisticsService = ', '')
+    var json = JSON.parse(temp.substring(0, temp.length - 1))
     let result = {
-        confirmedCount: tempArray[0],
-        suspectedCount: tempArray[1],
-        curedCount: tempArray[3],
-        deadCount: tempArray[2],
+        confirmedCount: json.confirmedCount,
+        suspectedCount: json.suspectedCount,
+        curedCount: json.curedCount,
+        deadCount: json.deadCount,
         addtime: addtime
     }
     spider.insertSumInfo(result)
@@ -103,10 +101,19 @@ const getSumInfoRealTime = (res, addtime = Date.now()) => {
 const getProvinceInfoRealTime = (res, addtime = Date.now()) => {
     let $ = cheerio.load(res.text)
     var patt = /(\swindow\.getAreaStat\s=\s).*\}\]\}\]/g
-    // console.log(res.text)
-    var final = patt.exec(res.text)[0].replace(' window.getAreaStat = ', '')
+    var patt2 = /(\swindow\.getAreaStat\s=\s).*\]\}\]/g
+    // var final = patt.exec(res.text)[0].replace(' window.getAreaStat = ', '')
     // var final = res.text.match(patt)
-    var json = JSON.parse(final)
+    var final, json;
+    if (final = res.text.match(patt)) {
+        var temp = final[0].replace(' window.getAreaStat = ', '')
+        json = JSON.parse(temp)
+    } else {
+        final = res.text.match(patt2)
+        var temp = final[0].replace(' window.getAreaStat = ', '')
+        json = JSON.parse(temp)
+    }
+
     json.forEach(province => {
         province['addtime'] = addtime
         spider.insertProvinceInfo(province).catch(err => {
