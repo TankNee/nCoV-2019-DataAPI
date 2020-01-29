@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var user = require('../service/user')
 var jwt = require('jsonwebtoken')
+var fs = require('fs')
 /**
  * 管理员登录接口
  */
@@ -29,11 +30,11 @@ router.post('/login', function (req, res, next) {
             }
             // 获取当前时间，单位是秒，作为token的创建时间
             let createdTime = Math.floor(Date.now() / 1000)
-            let token = jwt.sign({
-                content,
-                exp: createdTime + 60 * 60 * 24,
-                iat: createdTime
-            }, 'nCoV-2019', {algorithm: 'RS256'});
+            var secret = 'nCoV-2019-WuHan'
+            let token = jwt.sign(content,secret,{
+                expiresIn: '24h',
+                issuer: 'tanknee'
+            });
             res0[0].token = token
             user.updateUserInfo(res0[0])
             res.status(200)
@@ -60,6 +61,6 @@ router.post('/login', function (req, res, next) {
  * 获取用户信息接口
  */
 router.post('/getUserInfo', function (req, res, next) {
-
+    console.log(req.header.token)
 })
 module.exports = router;

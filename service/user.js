@@ -26,7 +26,7 @@ const getUserInfo = (attrName,attrValue) => {
  */
 const updateUserInfo = (user) => {
     return new Promise((resolve, reject) => {
-        db.query(`UPDATE users SET userName = '${user.userName}', password = '${user.password}',role = '${user.role}', lastLoginTime = ${user.lastLoginTime} WHERE id = ${user.id}`,(err,rows) => {
+        db.query(`UPDATE users SET userName = '${user.userName}', password = '${user.password}',role = '${user.role}', lastLoginTime = ${user.lastLoginTime},token = '${user.token}' WHERE id = ${user.id}`,(err,rows) => {
             if(err){
                 reject(err)
             }
