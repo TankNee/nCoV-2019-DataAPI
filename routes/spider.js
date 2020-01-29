@@ -28,7 +28,7 @@ router.get('/', function (req, res, next) {
  * 获取全国统计的最新数据
  */
 router.get('/sum', function (req, res, next) {
-    nCovUtils.getSpecifyInfo('', '', 'sumInfo', 'true', true).then(res1 => {
+    nCovUtils.getSpecifyInfo('', '', 'suminfo', 'true', true).then(res1 => {
         res.send(res1)
         res.end()
     }).catch(err => {
