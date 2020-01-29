@@ -31,7 +31,7 @@ router.post('/login', function (req, res, next) {
             // 获取当前时间，单位是秒，作为token的创建时间
             let createdTime = Math.floor(Date.now() / 1000)
             var secret = 'nCoV-2019-WuHan'
-            let token = jwt.sign(content,secret,{
+            let token = jwt.sign(content, secret, {
                 expiresIn: '24h',
                 issuer: 'tanknee'
             });
@@ -61,6 +61,31 @@ router.post('/login', function (req, res, next) {
  * 获取用户信息接口
  */
 router.post('/getUserInfo', function (req, res, next) {
-    console.log(req.header.token)
+    var token = req.headers.token
+    var id = req.body.id;
+    user.getUserInfo('id', id).then(res0 => {
+        if (res0[0].token === token) {
+            res.json({
+                code: 200,
+                msg: '获取成功',
+                userInfo: res0[0]
+            })
+            res.end()
+        }else {
+            res.status(603)
+            res.json({
+                code: 603,
+                msg: 'token验证失败',
+            })
+            res.end()
+        }
+    }).catch(err =>{
+        res.status(600)
+        res.json({
+            code: 600,
+            msg: `提交信息有误${err}`,
+        })
+        res.end()
+    })
 })
 module.exports = router;

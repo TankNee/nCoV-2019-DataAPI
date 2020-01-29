@@ -44,7 +44,11 @@ const getDatabaseData = () => {
                 }).catch(err => {
                     reject(err)
                 }).then(res3 => {
-                    resolve(result)
+                    var temp = {
+                        sumInfo: res[0],
+                        provinceInfo: result
+                    }
+                    resolve(temp)
                 })
 
             })
@@ -60,10 +64,11 @@ const getDatabaseData = () => {
  * @param {*} attrValue 参数值
  * @param {*} tableName 表名
  * @param {*} all 是否选取全部信息，如果为否，那么就返回最新信息
+ * @param isSum
  */
-const getSpecifyInfo = (attrName, attrValue, tableName, all = false) => {
+const getSpecifyInfo = (attrName, attrValue, tableName, all = false, isSum = false) => {
     return new Promise((resolve, reject) => {
-        spider.getSpecifyInfo(attrName, attrValue, tableName, all).then(res => {
+        spider.getSpecifyInfo(attrName, attrValue, tableName, all, isSum).then(res => {
             resolve(res)
         }).catch((err) => {
             reject(err)
