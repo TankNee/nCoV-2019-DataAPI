@@ -1,6 +1,6 @@
 # nCov-DataCollect
 
-[![API Usage](https://img.shields.io/badge/dynamic/json?color=orange&label=API%20Usage&query=%24.usage&url=http%3A%2F%2Fncov.neeto.cn%2Fapi%2Fusage)](https://lab.isaaclin.cn/nCoV/)
+[![API Usage](https://img.shields.io/badge/dynamic/json?color=orange&label=API%20Usage&query=%24.usage&url=http%3A%2F%2Fncov.neeto.cn%2Fapi%2Fusage)](https://tanknee.cn/2020/01/29/ncov)
 
 
 > 数据来自[丁香园](http://t.cn/A6vBv3yL)
@@ -15,7 +15,7 @@
 >
 > 登录密码：`demo`
 >
-> 模板来源：[lin-xin](https://tanknee.cn/2020/01/29/ncov)
+> 模板来源：[lin-xin](https://github.com/lin-xin/vue-manage-system)
 
 <img src="https://img.tanknee.cn/blogpicbed/2020/01/20200129bfa81ed0c5c5c.png"/>
 
