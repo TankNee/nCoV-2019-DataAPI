@@ -32,7 +32,56 @@
 
 #### 请求方法：
 
- `POST`
+ `GET`
+
+#### 返回实例:
+
+> 只截取了部分数据
+
+```json
+"sumInfo": {
+        "id": 1559,
+        "confirmedCount": 7830,
+        "curedCount": 135,
+        "deadCount": 170,
+        "suspectedCount": 12139,
+        "addtime": 1580387755098
+    },
+    "provinceInfo": [
+        {
+            "id": 19270,
+            "provinceName": "湖北省",
+            "provinceShortName": "湖北",
+            "confirmedCount": 4586,
+            "suspectedCount": 0,
+            "curedCount": 90,
+            "deadCount": 162,
+            "addtime": 1580387755098,
+            "cities": [
+                {
+                    "id": 176949,
+                    "cityName": "武汉",
+                    "provinceShortName": "湖北",
+                    "confirmedCount": 2261,
+                    "suspectedCount": 0,
+                    "curedCount": 54,
+                    "deadCount": 129,
+                    "addtime": 1580387755098
+                },....
+```
+
+#### 返回实例参数：
+
+| 参数名称          | 参数类型 | 备注     |
+| ----------------- | -------- | -------- |
+| provinceName      | String   | 省份全名 |
+| provinceShortName | String   | 省份短名 |
+| cityName          | String   | 城市名称 |
+| confirmedCount    | number   | 确诊人数 |
+| suspectedCount    | number   | 疑似人数 |
+| curedCount        | number   | 治愈人数 |
+| deadCount         | number   | 死亡人数 |
+| addtime           | number   | 爬取时间 |
 
 ### 获取实时数据：
 
@@ -40,7 +89,15 @@
 
 #### 请求方法：
 
- `POST`
+ `GET`
+
+### 获取疫情总和数据的全部历史数据：
+
+> http://ncov.neeto.cn/api/sum
+
+#### 请求方法：
+
+`GET`
 
 ### 获取单一省份的最新数据：
 
