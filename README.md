@@ -1,5 +1,8 @@
 # nCov-DataCollect
 
+[![API Usage](https://img.shields.io/badge/dynamic/json?color=orange&label=API%20Usage&query=%24.usage&url=http%3A%2F%2Fncov.neeto.cn%2Fapi%2Fusage)](https://lab.isaaclin.cn/nCoV/)
+
+
 > 数据来自[丁香园](http://t.cn/A6vBv3yL)
 
 本项目基于nodejs-express框架构建，使用正则表达式爬取页面信息
