@@ -107,8 +107,6 @@ const getProvinceInfoRealTime = (res, addtime = Date.now()) => {
     let $ = cheerio.load(res.text)
     var patt = /(\swindow\.getAreaStat\s=\s).*\}\]\}\]/g
     var patt2 = /(\swindow\.getAreaStat\s=\s).*\]\}\]/g
-    // var final = patt.exec(res.text)[0].replace(' window.getAreaStat = ', '')
-    // var final = res.text.match(patt)
     var final, json;
     if (final = res.text.match(patt)) {
         var temp = final[0].replace(' window.getAreaStat = ', '')
@@ -134,7 +132,32 @@ const getProvinceInfoRealTime = (res, addtime = Date.now()) => {
     });
     return json
 }
+/**
+ * 更新api使用情况
+ * @param usage
+ * @returns {Promise<unknown>}
+ */
+const apiUsage = (addtime,isStatistics = false) => {
+    return new Promise((resolve, reject) => {
+        spider.getSpecifyInfo('id', 1, 'apiusage').then(result => {
+            if (isStatistics){
+                --result[0].apiusage
+            }
+            spider.updateApiUsage(result[0].apiusage,addtime).then(res => {
+                resolve({
+                    usage: ++result[0].apiusage
+                })
+            }).catch(err => {
+                reject(err)
+            })
+        }).catch(err => {
+            reject(err)
+        })
+
+    })
+}
 
 exports.getRealTimeData = getRealTimeData
 exports.getDatabaseData = getDatabaseData
 exports.getSpecifyInfo = getSpecifyInfo
+exports.apiUsage = apiUsage

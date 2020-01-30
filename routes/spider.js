@@ -10,6 +10,8 @@ router.get('/realtime', function (req, res, next) {
     nCovUtils.getRealTimeData().then(res1 => {
         res.send(res1)
         res.end()
+    }).then(() =>{
+        nCovUtils.apiUsage(Date.now())
     })
 });
 /**
@@ -22,6 +24,8 @@ router.get('/', function (req, res, next) {
     }).catch(err => {
         res.send(err)
         res.end()
+    }).then(() =>{
+        nCovUtils.apiUsage(Date.now())
     })
 });
 /**
@@ -34,6 +38,8 @@ router.get('/sum', function (req, res, next) {
     }).catch(err => {
         res.send(err)
         res.end()
+    }).then(() =>{
+        nCovUtils.apiUsage(Date.now())
     })
 })
 /**
@@ -48,6 +54,8 @@ router.post('/city', function (req, res, next) {
         res.status(501)
         res.json(err)
         res.end()
+    }).then(() =>{
+        nCovUtils.apiUsage(Date.now())
     })
 })
 /**
@@ -78,6 +86,20 @@ router.post('/province', function (req, res, next) {
     }).catch(err => {
         res.status(501)
         res.json(err)
+        res.end()
+    }).then(() =>{
+        nCovUtils.apiUsage(Date.now())
+    })
+})
+/**
+ * 获取api的使用情况
+ */
+router.get('/usage',function (req,res,next) {
+    nCovUtils.apiUsage(Date.now(),true).then(result => {
+        res.send(result);
+        res.end()
+    }).catch(err =>{
+        res.send(err);
         res.end()
     })
 })

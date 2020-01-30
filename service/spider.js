@@ -85,17 +85,16 @@ const insertCityInfo = (city) => {
     })
 }
 /**
- * 更新城市信息
- * @param {*} city 
+ * 更新api使用信息
+ * @param {*} usage
  */
-const updateCityInfo = (city) => {
+const updateApiUsage = (usage,addtime) => {
     return new Promise((resolve, reject) => {
-        let sql = `UPDATE ncov_cityinfo SET province= '${city.province}',cityname = '${city.cityName}' ,confirmed = ${city.confirmed},died = ${city.died},cured=${city.cured} WHERE cityname = '${city.cityName}'`
+        let sql = `UPDATE apiusage SET apiusage= ${++usage},addtime = ${addtime} WHERE id = 1`
         db.query(sql, (err, rows) => {
             if (err) {
                 reject(err)
             }
-            console.log(rows);
             resolve(rows)
         })
     })
@@ -104,5 +103,5 @@ exports.getAllInfo = getAllInfo
 exports.insertSumInfo = insertSumInfo
 exports.insertProvinceInfo = insertProvinceInfo
 exports.insertCityInfo = insertCityInfo
-exports.updateCityInfo = updateCityInfo
+exports.updateApiUsage = updateApiUsage
 exports.getSpecifyInfo = getSpecifyInfo
