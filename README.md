@@ -15,7 +15,7 @@
 >
 > 登录密码：`demo`
 >
-> 模板来源：[lin-xin](https://github.com/lin-xin/vue-manage-system)
+> 模板来源：[lin-xin](https://tanknee.cn/2020/01/29/ncov)
 
 <img src="https://img.tanknee.cn/blogpicbed/2020/01/20200129bfa81ed0c5c5c.png"/>
 
