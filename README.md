@@ -2,10 +2,14 @@
 
 [![API Usage](https://img.shields.io/badge/dynamic/json?color=orange&label=API%20Usage&query=%24.usage&url=http%3A%2F%2Fncov.neeto.cn%2Fapi%2Fusage)](https://tanknee.cn/2020/01/29/ncov)
 
+[English README](./README_EN.md)
+
 
 > 数据来自[丁香园](http://t.cn/A6vBv3yL)
 
-本项目基于nodejs-express框架构建，使用正则表达式爬取页面信息
+>  本项目基于nodejs-express框架构建，使用正则表达式爬取页面信息
+>
+> 数据每二十分钟更新一次，从1月29号早上十点钟开始统计数据，前几日有部分数据没有统计到，后期有时间我会去别的地方找出来加入到数据库中的！
 
 ## 数据可视化查看地址
 
@@ -19,9 +23,17 @@
 
 <img src="https://img.tanknee.cn/blogpicbed/2020/01/20200129bfa81ed0c5c5c.png"/>
 
-<img src="https://img.tanknee.cn/blogpicbed/2020/01/202001292c6a1345064f1.png"/>
+<img src="https://img.tanknee.cn/blogpicbed/2020/02/20200202473de5951df0f.png"/>
 
-<img src="https://img.tanknee.cn/blogpicbed/2020/01/202001294869760b6e94b.png"/>
+<img src="https://img.tanknee.cn/blogpicbed/2020/02/20200202e1a9ffd4b217b.png"/>
+
+## 提供了一些简单的图表统计
+
+> 点击左侧边栏的第二项即可
+
+<img src="https://img.tanknee.cn/blogpicbed/2020/02/20200202ce28af5f63103.png"/>
+
+<img src="https://img.tanknee.cn/blogpicbed/2020/02/20200202c10d18c928b33.png"/>
 
 ## api接口地址
 

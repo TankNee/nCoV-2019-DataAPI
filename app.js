@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var schedule = require('node-schedule')
 var cors = require('cors')
+var compression = require('compression')
 const nCovUtils = require('./utils/nCovInfoUtils')
 
 var indexRouter = require('./routes/index');
@@ -21,13 +22,14 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(compression())
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({
   methods:['GET','POST','OPTIONS'],
   alloweHeaders: ["Content-Type", "application/json;charset=utf-8;application/x-www-form-urlencoded"]
 }))
 app.use('/admin',express.static(path.join(__dirname, 'docs')));
-// app.use('/', indexRouter);
+app.use('/', indexRouter);
 app.use('/admin', usersRouter);
 app.use('/api', spiderRouter);
 
