@@ -2,56 +2,55 @@
 
 [![API Usage](https://img.shields.io/badge/dynamic/json?color=orange&label=API%20Usage&query=%24.usage&url=http%3A%2F%2Fncov.neeto.cn%2Fapi%2Fusage)](https://tanknee.cn/2020/01/29/ncov)
 
-[English README](./README_EN.md)
+English README
 
+> Data from [丁香园](http://t.cn/A6vBv3yL)
 
-> 数据来自[丁香园](http://t.cn/A6vBv3yL)
-
->  本项目基于nodejs-express框架构建，使用正则表达式爬取页面信息
+> This project is based on the nodejs-express framework, using regular expressions to crawl the page information
 >
-> 数据每二十分钟更新一次，从1月29号早上十点钟开始统计数据，前几日有部分数据没有统计到，后期有时间我会去别的地方找出来加入到数据库中的！
+> The data is updated every twenty minutes. Statistics are started at 10 o'clock in the morning on January 29th. Some data were not counted in the previous few days. I will find somewhere else in the later period to add to the database!
 
-## 数据可视化查看地址
+## Data visualization view address
 
-[管理后台](http://ncov.neeto.cn/admin)
+[Management background] (http://ncov.neeto.cn/admin)
 
-> 登录用户名 ： `demo`
+> Login username: `demo`
 >
-> 登录密码：`demo`
+> Login password: `demo`
 >
-> 模板来源：[lin-xin](https://github.com/lin-xin/vue-manage-system)
+> Template source: [lin-xin] (https://github.com/lin-xin/vue-manage-system)
 
-<img src="https://img.tanknee.cn/blogpicbed/2020/01/20200129bfa81ed0c5c5c.png"/>
+<img src = "https://img.tanknee.cn/blogpicbed/2020/01/20200129bfa81ed0c5c5c.png" />
 
-<img src="https://img.tanknee.cn/blogpicbed/2020/02/20200202473de5951df0f.png"/>
+<img src = "https://img.tanknee.cn/blogpicbed/2020/02/20200202473de5951df0f.png" />
 
-<img src="https://img.tanknee.cn/blogpicbed/2020/02/20200202e1a9ffd4b217b.png"/>
+<img src = "https://img.tanknee.cn/blogpicbed/2020/02/20200202e1a9ffd4b217b.png" />
 
-## 提供了一些简单的图表统计
+## provides some simple chart statistics
 
-> 点击左侧边栏的第二项即可
+> Click on the second item in the left sidebar
 
-<img src="https://img.tanknee.cn/blogpicbed/2020/02/20200202ce28af5f63103.png"/>
+<img src = "https://img.tanknee.cn/blogpicbed/2020/02/20200202ce28af5f63103.png" />
 
-<img src="https://img.tanknee.cn/blogpicbed/2020/02/20200202c10d18c928b33.png"/>
+<img src = "https://img.tanknee.cn/blogpicbed/2020/02/20200202c10d18c928b33.png" />
 
-## api接口地址
+## api interface address
 
-#### 基础URL：
+#### Base URL:
 
 > http://ncov.neeto.cn/api/
 
-### 获取后台数据库中的最新数据：
+### Get the latest data in the background database:
 
 > http://ncov.neeto.cn/api/
 
-#### 请求方法：
+#### Request method:
 
  `GET`
 
-#### 返回实例:
+#### Returns the instance:
 
-> 只截取了部分数据
+> Intercepted only part of the data
 
 ```json
 "sumInfo": {
@@ -85,51 +84,53 @@
                 },....
 ```
 
-#### 返回实例参数：
 
-| 参数名称          | 参数类型 | 备注     |
-| ----------------- | -------- | -------- |
-| provinceName      | String   | 省份全名 |
-| provinceShortName | String   | 省份短名 |
-| cityName          | String   | 城市名称 |
-| confirmedCount    | number   | 确诊人数 |
-| suspectedCount    | number   | 疑似人数 |
-| curedCount        | number   | 治愈人数 |
-| deadCount         | number   | 死亡人数 |
-| addtime           | number   | 爬取时间 |
 
-### 获取实时数据：
+#### Returns instance parameters:
+
+| Parameter name    | Parameter type | Remarks  |
+| ----------------- | -------------- | -------- |
+| provinceName      | String         | 省份全名 |
+| provinceShortName | String         | 省份短名 |
+| cityName          | String         | 城市名称 |
+| confirmedCount    | number         | 确诊人数 |
+| suspectedCount    | number         | 疑似人数 |
+| curedCount        | number         | 治愈人数 |
+| deadCount         | number         | 死亡人数 |
+| addtime           | number         | 爬取时间 |
+
+### Get real-time data:
 
 > http://ncov.neeto.cn/api/realtime
 
-#### 请求方法：
+#### Request method:
 
  `GET`
 
-### 获取疫情总和数据的全部历史数据：
+### Get all historical data of the total epidemic data:
 
 > http://ncov.neeto.cn/api/sum
 
-#### 请求方法：
+#### Request method:
 
 `GET`
 
-### 获取单一省份的最新数据：
+### Get the latest data for a single province:
 
 > http://ncov.neeto.cn/api/province
 
-#### 请求参数：
+#### Request parameters:
 
-| 参数名称 | 参数类型 | 备注                              |
-| -------- | -------- | --------------------------------- |
-| province | String   | 省份名称                          |
-| all      | String   | 是否获取全部历史消息，默认为false |
+| Parameter name | Parameter type | Remarks                           |
+| -------------- | -------------- | --------------------------------- |
+| province       | String         | 省份名称                          |
+| all            | String         | 是否获取全部历史消息，默认为false |
 
-#### 请求方法：
+#### Request method:
 
  `POST`
 
-#### 返回实例：
+#### Returns the instance:
 
 ```json
 {
@@ -260,37 +261,35 @@
 }
 ```
 
-#### 返回实例参数：
+#### Return parameters:
 
-| 参数名称          | 参数类型      | 备注     |
-| ----------------- | ------------- | -------- |
-| provinceName      | String        | 省份全名 |
-| provinceShortName | String        | 省份短名 |
-| cityName          | String        | 城市名称 |
-| confirmedCount    | number        | 确诊人数 |
-| suspectedCount    | number        | 疑似人数 |
-| curedCount        | number        | 治愈人数 |
-| deadCount         | number        | 死亡人数 |
-| addtime           | number        | 爬取时间 |
+| Parameter name    | Parameter type | Remarks  |
+| ----------------- | -------------- | -------- |
+| provinceName      | String         | 省份全名 |
+| provinceShortName | String         | 省份短名 |
+| cityName          | String         | 城市名称 |
+| confirmedCount    | number         | 确诊人数 |
+| suspectedCount    | number         | 疑似人数 |
+| curedCount        | number         | 治愈人数 |
+| deadCount         | number         | 死亡人数 |
+| addtime           | number         | 爬取时间 |
 
-
-
-### 获取单一城市的全部信息：
+### Get all the information for a single city:
 
 > http://ncov.neeto.cn/api/city
 
-#### 请求参数：
+#### Request parameters:
 
-| 参数名称 | 参数类型 | 备注                              |
-| -------- | -------- | --------------------------------- |
-| cityname | String   | 城市名称                          |
-| all      | String   | 是否获取全部历史消息，默认为false |
+| Parameter name | Parameter type | Remarks                           |
+| -------------- | -------------- | --------------------------------- |
+| province       | String         | 省份名称                          |
+| all            | String         | 是否获取全部历史消息，默认为false |
 
-#### 请求方法：
+#### Request method:
 
  `POST`
 
-#### 返回实例：
+#### Returns the instance:
 
 ```json
 [
@@ -307,19 +306,19 @@
 ]
 ```
 
-#### 返回实例参数：
+#### Returns instance parameters:
 
-| 参数名称          | 参数类型      | 备注     |
-| ----------------- | ------------- | -------- |
-| provinceShortName | String        | 省份短名 |
-| cityName          | String        | 城市名称 |
-| confirmedCount    | number        | 确诊人数 |
-| suspectedCount    | number        | 疑似人数 |
-| curedCount        | number        | 治愈人数 |
-| deadCount         | number        | 死亡人数 |
-| addtime           | number        | 爬取时间 |
+| Parameter name    | Parameter type | Remarks  |
+| ----------------- | -------------- | -------- |
+| provinceShortName | String         | 省份短名 |
+| cityName          | String         | 城市名称 |
+| confirmedCount    | number         | 确诊人数 |
+| suspectedCount    | number         | 疑似人数 |
+| curedCount        | number         | 治愈人数 |
+| deadCount         | number         | 死亡人数 |
+| addtime           | number         | 爬取时间 |
 
-## 项目使用方法
+## How to use 
 
 ```bash
 ## git clone from github
