@@ -1,5 +1,7 @@
 # nCov-DataCollect
 
+> # 一个非常不幸的消息，我的服务器因为众所周知的原因不可用了， 因此这个项目被迫中止，而且我的数据库也没有备份，所以我准备归档本项目。项目源码可供大家借鉴。
+
 [![API Usage](https://img.shields.io/badge/dynamic/json?color=orange&label=API%20Usage&query=%24.usage&url=http%3A%2F%2Fncov.neeto.cn%2Fapi%2Fusage)](https://tanknee.cn/2020/01/29/ncov)
 
 [English README](./README_EN.md)

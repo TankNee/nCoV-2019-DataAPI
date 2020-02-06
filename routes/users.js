@@ -86,7 +86,7 @@ router.post('/getUserInfo', function (req, res, next) {
                 res.status(604)
                 res.json({
                     code: 604,
-                    msg: 'token揭秘错误',
+                    msg: 'token解密错误',
                     err: err
                 })
                 res.end()
