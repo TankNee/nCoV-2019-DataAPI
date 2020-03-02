@@ -1,6 +1,6 @@
 # nCov-DataCollect
 
-> # A very unfortunate news, my server is unavailable for well-known reasons, so this project was forced to be suspended, and my database was not backed up, so I am going to archive this project. The source code of the project can be used for reference.
+> Thanks for aliCloud gave me half a year's server, So,I'm going to open up this interface, the domain name has been replaced, temporarily don't use HTTPS. Friends can then use!
 
 [![API Usage](https://img.shields.io/badge/dynamic/json?color=orange&label=API%20Usage&query=%24.usage&url=http%3A%2F%2Fncov.tanknee.cn%2Fapi%2Fusage)](https://tanknee.cn/2020/01/29/ncov)
 
