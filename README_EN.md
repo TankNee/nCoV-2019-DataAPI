@@ -2,7 +2,7 @@
 
 > # A very unfortunate news, my server is unavailable for well-known reasons, so this project was forced to be suspended, and my database was not backed up, so I am going to archive this project. The source code of the project can be used for reference.
 
-[![API Usage](https://img.shields.io/badge/dynamic/json?color=orange&label=API%20Usage&query=%24.usage&url=http%3A%2F%2Fncov.neeto.cn%2Fapi%2Fusage)](https://tanknee.cn/2020/01/29/ncov)
+[![API Usage](https://img.shields.io/badge/dynamic/json?color=orange&label=API%20Usage&query=%24.usage&url=http%3A%2F%2Fncov.tanknee.cn%2Fapi%2Fusage)](https://tanknee.cn/2020/01/29/ncov)
 
 English README
 
@@ -14,7 +14,7 @@ English README
 
 ## Data visualization view address
 
-[Management background] (http://ncov.neeto.cn/admin)
+[Management background] (http://ncov.tanknee.cn/admin)
 
 > Login username: `demo`
 >
@@ -40,11 +40,11 @@ English README
 
 #### Base URL:
 
-> http://ncov.neeto.cn/api/
+> http://ncov.tanknee.cn/api/
 
 ### Get the latest data in the background database:
 
-> http://ncov.neeto.cn/api/
+> http://ncov.tanknee.cn/api/
 
 #### Request method:
 
@@ -103,7 +103,7 @@ English README
 
 ### Get real-time data:
 
-> http://ncov.neeto.cn/api/realtime
+> http://ncov.tanknee.cn/api/realtime
 
 #### Request method:
 
@@ -111,7 +111,7 @@ English README
 
 ### Get all historical data of the total epidemic data:
 
-> http://ncov.neeto.cn/api/sum
+> http://ncov.tanknee.cn/api/sum
 
 #### Request method:
 
@@ -119,7 +119,7 @@ English README
 
 ### Get the latest data for a single province:
 
-> http://ncov.neeto.cn/api/province
+> http://ncov.tanknee.cn/api/province
 
 #### Request parameters:
 
@@ -278,7 +278,7 @@ English README
 
 ### Get all the information for a single city:
 
-> http://ncov.neeto.cn/api/city
+> http://ncov.tanknee.cn/api/city
 
 #### Request parameters:
 
